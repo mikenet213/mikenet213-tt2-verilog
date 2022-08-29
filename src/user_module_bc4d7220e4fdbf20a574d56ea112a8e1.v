@@ -21,9 +21,15 @@ module lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (input [IN_WIDTH-1:0] 
                                                            output [OUT_WIDTH-1:0] out);
  
                                                       
-  wire [2**IN_WIDTH-1:0] [OUT_WIDTH-1:0] chunked_in;
+  wire [OUT_WIDTH-1:0] chunked_in [2**IN_WIDTH-1:0];
   
-  assign chunked_in = in;
+  genvar i;
+  
+  generate
+    for (i = 0; i < 2**IN_WIDTH; i = i+1) begin
+      assign chunked_in[i] = in[(i+1) * IN_WIDTH - 1 -: IN_WIDTH];
+    end
+  endgenerate	     
   
   assign out = chunked_in[sel];
   
