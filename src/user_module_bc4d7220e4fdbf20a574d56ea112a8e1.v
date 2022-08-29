@@ -60,5 +60,3 @@ module user_module_bc4d7220e4fdbf20a574d56ea112a8e1(
   assign io_out[7:4] = 0;
   
 endmodule
-  
-endmodule
