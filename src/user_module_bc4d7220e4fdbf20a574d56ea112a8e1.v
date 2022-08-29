@@ -54,8 +54,8 @@ module user_module_bc4d7220e4fdbf20a574d56ea112a8e1(
   output [7:0] io_out
 );
   
-  serial_load_lut #(3, 8) lut(.d(io_in[0]), .clk(io_in[1]), .rst_n(io_in[2]), .cs_n(io_in[3]), 
-                              .sel(io_in[6:4]), .out(io_out[7:0]));
+  serial_load_lut #(2, 8) lut(.d(io_in[0]), .clk(io_in[1]), .rst_n(io_in[2]), .cs_n(io_in[3]), 
+                              .sel(io_in[5:4]), .out(io_out[7:0]));
   
   //assign io_out[7:3] = 0;
   
