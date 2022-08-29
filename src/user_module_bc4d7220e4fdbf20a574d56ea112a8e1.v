@@ -27,7 +27,7 @@ module lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (input [IN_WIDTH-1:0] 
   
   generate
     for (i = 0; i < 2**IN_WIDTH; i = i+1) begin
-      assign chunked_in[i] = in[(i+1) * IN_WIDTH - 1 -: IN_WIDTH];
+      assign chunked_in[i] = in[(i+1) * OUT_WIDTH - 1 -: OUT_WIDTH];
     end
   endgenerate	     
   
