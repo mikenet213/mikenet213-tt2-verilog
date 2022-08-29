@@ -17,10 +17,10 @@ module s_p_shift_reg #(parameter LENGTH=256) (input d,
 endmodule
 
 module lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (input [IN_WIDTH-1:0] sel,
-                                                           input [2**(IN_WIDTH+OUT_WIDTH)-1:0] in,
+                                                           input [2**(IN_WIDTH)*OUT_WIDTH-1:0] in,
                                                            output [OUT_WIDTH-1:0] out);
  
-                                                      
+  
   wire [OUT_WIDTH-1:0] chunked_in [2**IN_WIDTH-1:0];
   
   genvar i;
@@ -38,9 +38,9 @@ endmodule
 module serial_load_lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (
   input d, input clk, input rst_n, input cs_n, input [IN_WIDTH-1:0] sel, output [OUT_WIDTH-1:0] out);
   
-  wire [2**(IN_WIDTH+OUT_WIDTH)-1:0] parallel_table;
+  wire [2**(IN_WIDTH)*OUT_WIDTH-1:0] parallel_table;
   
-  s_p_shift_reg #(2**(IN_WIDTH+OUT_WIDTH)) p_s_shift_reg(.d(d),.clk(clk),.rst_n(rst_n),.cs_n(cs_n),
+  s_p_shift_reg #(2**(IN_WIDTH)*OUT_WIDTH) p_s_shift_reg(.d(d),.clk(clk),.rst_n(rst_n),.cs_n(cs_n),
                                                          .out(parallel_table));
   
   lut #(IN_WIDTH, OUT_WIDTH) lut(.sel(sel), .in(parallel_table), .out(out));
@@ -48,15 +48,14 @@ module serial_load_lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (
   
 endmodule
 
-// Wrap for TinyTapeout
-module user_module_bc4d7220e4fdbf20a574d56ea112a8e1(
+module serial_load_lut_tt(
   input [7:0] io_in,
   output [7:0] io_out
 );
   
-  serial_load_lut #(4, 3) lut(.d(io_in[0]), .clk(io_in[1]), .rst_n(io_in[2]), .cs_n(io_in[3]), 
-                              .sel(io_in[7:4]), .out(io_out[2:0]));
+  serial_load_lut #(4, 4) lut(.d(io_in[0]), .clk(io_in[1]), .rst_n(io_in[2]), .cs_n(io_in[3]), 
+                              .sel(io_in[7:4]), .out(io_out[3:0]));
   
-  assign io_out[7:3] = 0;
+  assign io_out[7:4] = 0;
   
 endmodule
