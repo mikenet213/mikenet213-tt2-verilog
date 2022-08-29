@@ -49,7 +49,7 @@ module serial_load_lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (
   
 endmodule
 
-module serial_load_lut_tt(
+module user_module_bc4d7220e4fdbf20a574d56ea112a8e1(
   input [7:0] io_in,
   output [7:0] io_out
 );
