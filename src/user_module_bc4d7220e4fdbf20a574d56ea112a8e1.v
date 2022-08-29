@@ -20,6 +20,7 @@ module lut #(parameter IN_WIDTH=4, parameter OUT_WIDTH=4) (input [IN_WIDTH-1:0] 
                                                            input [2**(IN_WIDTH)*OUT_WIDTH-1:0] in,
                                                            output [OUT_WIDTH-1:0] out);
  
+ 
   
   wire [OUT_WIDTH-1:0] chunked_in [2**IN_WIDTH-1:0];
   
@@ -53,9 +54,11 @@ module serial_load_lut_tt(
   output [7:0] io_out
 );
   
-  serial_load_lut #(4, 4) lut(.d(io_in[0]), .clk(io_in[1]), .rst_n(io_in[2]), .cs_n(io_in[3]), 
-                              .sel(io_in[7:4]), .out(io_out[3:0]));
+  serial_load_lut #(3, 3) lut(.d(io_in[0]), .clk(io_in[1]), .rst_n(io_in[2]), .cs_n(io_in[3]), 
+                              .sel(io_in[6:4]), .out(io_out[2:0]));
   
-  assign io_out[7:4] = 0;
+  assign io_out[7:3] = 0;
+  
+endmodule
   
 endmodule
