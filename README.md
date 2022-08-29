@@ -1,4 +1,1 @@
-(Original readme for the template repository [here](https://github.com/mattvenn/wokwi-verilog-gds-test/blob/main/README.md))
-
-4-in => 3-out LUT, loaded via a SPI interface. 4-in => 3-out seemed to be the biggest I could fit :-).
-
+Okay, SPI-Loaded 2-in => 8-out LUT, but with rotate-by-8 input. This lets you load 4 7-seg images and either select them, or pulse tthe rotate line for animation. So a small tweak on the previous with a very different aspect ratio and application. And hey, blinky lights/animation is cool, no?
